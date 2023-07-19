@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Addition UI</title>
+    <!-- Add your CSS styles here (optional) -->
+</head>
+<body>
+    <h1>Simple Addition UI</h1>
+    <label for="number1">Number 1:</label>
+    <input type="number" id="number1" placeholder="Enter a number">
+
+    <label for="number2">Number 2:</label>
+    <input type="number" id="number2" placeholder="Enter a number">
+
+    <button onclick="performAddition()">Add</button>
+
+    <div id="result"></div>
+
+    <a href="#" id="downloadLink" style="display: none;">Download Result</a>
+
+    <!-- Add your JavaScript code here -->
+    <script>
+function performAddition() {
+    const number1 = parseFloat(document.getElementById('number1').value);
+    const number2 = parseFloat(document.getElementById('number2').value);
+
+    if (isNaN(number1) || isNaN(number2)) {
+        alert('Please enter valid numbers.');
+        return;
+    }
+
+    const result = number1 + number2;
+    document.getElementById('result').innerText = `Result: ${result}`;
+
+    const downloadLink = document.getElementById('downloadLink');
+    downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(`Result: ${result}`);
+    downloadLink.download = 'result.txt';
+    downloadLink.style.display = 'block';
+}
+</script>
+
+</body>
+</html>
