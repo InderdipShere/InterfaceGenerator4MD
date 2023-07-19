@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 1: Optimization of UC</title>
+    <!-- Add your CSS styles here (optional) -->
+</head>
+<body>
+    <h1>Step 1: Optimization of UC</h1>
+    <p>Upload your UC file:</p>
+    <input type="file" id="fileInput" accept=".uc">
+
+    <button onclick="optimizeUC()">Optimize UC</button>
+
+    <div id="result">
+        <!-- The generated batch script will be displayed here -->
+    </div>
+
+    <script>
+    function optimizeUC() {
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert('Please select a UC file to optimize (*.cif).');
+            return;
+        }
+
+        // Read the contents of the uploaded UC file
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const ucContent = event.target.result;
+
+            // Perform your optimization using a Bash script (replace the example script below)
+            const optimizedScript = optimizeWithBashScript(ucContent);
+
+            // Display the generated batch script on the screen
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerText = optimizedScript;
+        };
+        reader.readAsText(file);
+    }
+
+    function optimizeWithBashScript(ucContent) {
+        // Replace this example Bash script with your actual script logic
+        // This is just a placeholder example
+        const optimizedScript = `#!/bin/bash
+# Your Bash script to optimize the UC file goes here
+linen=$(wc -l ${ucContent} |awk '{print $1}')
+line=$(($linen-30))
+tail -n $line ${ucContent} > temp
+awk '{print $N}' temp > optimized_uc.uc
+# Example: echo "${ucContent}" > optimized_uc.uc
+`;
+
+        return optimizedScript;
+    }
+    </script>
+</body>
+</html>
